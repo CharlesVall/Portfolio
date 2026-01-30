@@ -1,0 +1,14 @@
+#typewriter-title {
+  position: absolute;
+  left: calc(25% + 580px);
+  top: 30%;
+  margin: 0;
+  color: #ffffff;
+  font-family: 'Arial';
+  font-size: 4rem;
+  line-height: 3.3rem;
+}
+
+#line1, #line2 {
+  display: inline-block;
+}

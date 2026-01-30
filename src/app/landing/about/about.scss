@@ -1,0 +1,43 @@
+section.about-section {
+  .container {
+    display: flex;
+    .left {
+      width: 50%;
+      .details-wrapper {
+        margin: auto;
+        width: 80%;
+        .details  {
+          height: 100vh;
+	        display:flex;
+	        flex-direction:column;
+	        justify-content:center;
+        }
+      }
+    }
+    .right {
+      width: 50%;
+      height: 100vh;
+	    display:flex;
+	    flex-direction:column;
+	    justify-content:center;
+      .images {
+	      width:20vw;
+	      height:20vw;
+	      position:relative;
+        margin: auto;
+        overflow: hidden;
+        border-radius: 1rem;
+        .image {
+          width: 100%;
+          height: 100%;
+          position: absolute;
+          display: flex;
+          justify-content: center;
+          font-size: 6rem;
+          align-items: center;
+          border-radius: 1rem;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,1 @@
+export type Technology = "Angular" | "Java" | "NodeJs" | "Python" | "About";

@@ -1,0 +1,44 @@
+header {
+  position: fixed;
+  z-index: 5;
+
+  width: 100vw;
+  height: 65px;
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .header-container {
+    width: 97%;
+    height: 100%;
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: solid 0.2px rgba(255, 255, 255, 0.193);
+    
+    .name-displayer {
+      display: flex;
+      p {
+        margin: 0;
+        width: 100%;
+        #name {
+          font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+          opacity: 1;
+          font-weight: 400;
+        }
+        #lastname {
+          font-family:'Courier New', Courier, monospace;
+          opacity: 0.6;
+        }
+      }
+    }
+    
+  }
+  &.scrolled {
+    background: rgba(0, 0, 0, 0.097);
+    backdrop-filter: blur(4px);
+    transition: 0.4s;
+  }
+}
