@@ -1,5 +1,5 @@
 .app-layout {
-  display: flex;
+  display: block;
   width: 100%;
-  overflow: hidden;
+  min-height: 100vh;
 }

@@ -5,11 +5,15 @@ nav {
     display: flex;
     justify-content: space-between;
     width: 12.5rem;
+    @media (max-width: 1024px) {
+      width: 12.5rem;
+    }
     li {
       color: white;
       cursor: pointer;
       a {
         position: relative;
+        text-decoration: none;
       }
 
       a::before {

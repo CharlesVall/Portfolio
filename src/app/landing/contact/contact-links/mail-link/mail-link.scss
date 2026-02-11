@@ -1,0 +1,27 @@
+.contact-link-mail {
+  --magic-color: #D87036;
+  position: relative;
+  text-decoration: none;
+  font-size: 2rem;
+  font-weight: 500;
+  display: inline-block;
+  z-index: 3;
+}
+
+.contact-link-mail::after {
+  content: "";
+  position: absolute;
+  bottom: 10%;
+  left: 0%;
+  width: 101%;
+  height: 0.25em; 
+  background: var(--magic-color);
+  z-index: -1;
+  transition: all 0.3s ease-in-out;
+}
+
+.contact-link-mail:hover::after {
+  height: 1em; 
+  transition: all 0.3s ease-in-out;
+  transform: translateY(2px);
+}

@@ -1,16 +1,34 @@
 section.about-section {
+  width: 100vw;
+  @media (max-width: 1024px) {
+    margin-bottom: 10rem;
+  }
   .container {
     display: flex;
+    @media (max-width: 1024px) {
+      flex-direction: column;
+    }
     .left {
       width: 50%;
+      @media (max-width: 1024px) {
+        width: 100%;
+      }
       .details-wrapper {
         margin: auto;
         width: 80%;
+        @media (max-width: 1024px) {
+          display: flex;
+          flex-direction: column;
+          gap: 5rem;
+        }
         .details  {
-          height: 100vh;
+          min-height: 100vh;
 	        display:flex;
 	        flex-direction:column;
 	        justify-content:center;
+          @media (max-width: 1024px) {
+            min-height: 80vh;
+          }
         }
       }
     }
@@ -20,6 +38,9 @@ section.about-section {
 	    display:flex;
 	    flex-direction:column;
 	    justify-content:center;
+      @media (max-width: 1024px) {
+        display: none;
+      }
       .images {
 	      width:20vw;
 	      height:20vw;

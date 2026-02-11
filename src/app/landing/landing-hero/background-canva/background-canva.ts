@@ -1,5 +1,6 @@
-import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
-import { Application, Assets, Container, Sprite, Text } from 'pixi.js';
+import { isPlatformBrowser } from '@angular/common';
+import { afterNextRender, Component, ElementRef, inject, NgZone, OnDestroy, PLATFORM_ID, viewChild } from '@angular/core';
+import { Application, Assets, Container, Sprite } from 'pixi.js';
 
 @Component({
   selector: 'app-background-canva',
@@ -7,64 +8,155 @@ import { Application, Assets, Container, Sprite, Text } from 'pixi.js';
   templateUrl: './background-canva.html',
   styleUrl: './background-canva.scss',
 })
-export class BackgroundCanva implements OnInit {
-  @ViewChild('canvasContainer', { static: true }) canvaContainer!: ElementRef;
+export class BackgroundCanva implements OnDestroy {
+  private readonly canvaContainer = viewChild.required<ElementRef<HTMLDivElement>>('canvasContainer')
 
-  public constructor(private renderer: Renderer2) {}
+  private readonly ngZone = inject(NgZone);
+  private readonly platformId = inject(PLATFORM_ID);
 
-  public ngOnInit(): void {
-    (async ()  => {
-      let delay = 0;
-      const app = new Application();
+  private app?: Application;
 
-      await app.init({ 
-        width: window.innerWidth,
-        height: window.innerHeight * 1.5,
-        background: '#000000ff'
-      });
+  public constructor() {
+    afterNextRender(async() => {
+      if (isPlatformBrowser(this.platformId)) {
+        await this.ngZone.runOutsideAngular(() => this.initPixi());
+      }
+    })
+  }
 
-      this.renderer.appendChild(this.canvaContainer.nativeElement, app.canvas);
+  private resizeHandler = () => {
+    this.app!.renderer.resize(window.innerWidth, window.innerHeight * 1.5);
+  }
 
-      const container = new Container();
-      const moonContainer = new Container();
-      const blendContainer = new Container();
+  private async initPixi() {     
+    let animationOffset = 0;
+    this.app = new Application();
 
-      app.stage.addChild(container);
-      app.stage.addChild(moonContainer);
-      app.stage.addChild(blendContainer);
+    await this.app.init({ 
 
-      const earthTexture = await Assets.load('earth2.png');
-      const moonTexture = await Assets.load('moon.png')
-      const blendTexture = await Assets.load('transparent3.png')
+      width: window.innerWidth,
+      height: window.innerHeight * 1.5,
+      background: '#000000ff',
+      resolution: window.devicePixelRatio || 1,
+      autoDensity: true,
+    });
 
-      const earth = new Sprite(earthTexture);
-      const moon = new Sprite(moonTexture);
-      const blend = new Sprite (blendTexture);
+    window.addEventListener('resize', this.resizeHandler);
 
-      container.addChild(earth);
-      moonContainer.addChild(moon)
-      moonContainer.addChild(blend)
+    this.canvaContainer().nativeElement.appendChild(this.app.canvas)
+    
+    const container = new Container();
+    const moonContainer = new Container();
+    const blendContainer = new Container();
+
+    this.app.stage.addChild(container);
+    this.app.stage.addChild(moonContainer);
+    this.app.stage.addChild(blendContainer);
+    
+    const earthTexture = await Assets.load('canva/earth.png');
+    const moonTexture = await Assets.load('canva/moon.png');
+    const blendTexture = await Assets.load('canva/transparent.png');
+
+    const earth = new Sprite(earthTexture);
+    const moon = new Sprite(moonTexture);
+    const blend = new Sprite(blendTexture);
+
+    container.addChild(earth);
+    moonContainer.addChild(moon)
+    blendContainer.addChild(blend)
+    
+    earth.scale.set(0.5)
+    earth.anchor.set(0.5)
+    moon.anchor.set(0.5)
+    blend.anchor.set(0.5)
+    earth.x = container.width / 2;
+    earth.y = container.height / 2;
+    blend.x = blendContainer.width / 2;
+    blend.y = blendContainer.height / 2;
+    
+    container.x = this.app.screen.width / 2;
+    container.y = this.app.screen.height / 2 + 135;
+    moonContainer.x = this.app.screen.width / 2;
+    moonContainer.y = this.app.screen.height / 2 - 50;
+    blendContainer.x = -this.app.screen.width / 2 + 135;
+    blendContainer.y = this.app.screen.height - blendContainer.height;
+
+    container.pivot.x = container.width / 2;
+    container.pivot.y = container.height / 2;
+    container.rotation = - Math.PI / 2;  
+
+    this.app.renderer.on('resize', () => {
+      container.x = this.app!.screen.width / 2;
+      moonContainer.x = this.app!.screen.width / 2;
+    });
+
+    this.app.ticker.add((time) => {
+      animationOffset += 1;
+      let delta = time.deltaTime
+    
+      let speed = 0.1;
+      if (animationOffset < 8000) {
+        container.y -= speed * delta;
+      }
+
       
-      moon.y = -190;
-      blend.y = 518;
-      earth.scale.set(0.5)
+
+    })
+  }
   
-      container.x = app.screen.width / 2;
-      container.y = app.screen.height / 2 + 135;
-      container.pivot.x = container.width / 2;
-      container.pivot.y = container.height / 2;
-      container.rotation = - Math.PI / 2;      
-
-      app.ticker.add((time) => {
-        delay += 1;
-        let delta = time.deltaTime
-      
-        let speed = 0.1;
-        if (delay < 8000) {
-          container.y -= speed * delta;
-        }
-      })
-
-    })();
+  public ngOnDestroy(): void {
+    if (this.app) {
+      this.app.destroy(true, {children: true, texture: true})
+      window.removeEventListener('resize', this.resizeHandler)
+    }
   }
 }
+
+    /*
+        
+    shape1.scale.set(1)
+    shape2.scale.set(1)
+    shapeContainer1.rotation = Math.PI / 3;
+    shapeContainer1.x = this.app.screen.width / 1.15;
+    shapeContainer1.y = -this.app.screen.height / 1.5;
+    
+
+    const shapeContainer1 = new Container();
+    const shapeContainer2 = new Container();
+    this.app.stage.addChild(shapeContainer1);
+    this.app.stage.addChild(shapeContainer2);
+
+    shapeContainer2.rotation = Math.PI / 3;
+    shapeContainer2.x += 98;
+    shapeContainer2.y += -this.app.screen.height / 1.5
+    
+    shapeContainer1.addChild(shape1)
+    shapeContainer2.addChild(shape2)
+
+
+    const blackTexture = await Assets.load('black-shape.jpg')
+    const shape1 = new Sprite(blackTexture)
+    const shape2 = new Sprite(blackTexture)
+
+      if (animationOffset < 20) {
+        shapeContainer1.x += (25 *speed) * delta
+        shapeContainer1.y -= (25 *speed) * delta
+        shapeContainer2.x -= (25 *speed) * delta
+        shapeContainer2.y += (25 *speed) * delta
+      }
+
+      if (animationOffset > 21 && animationOffset < 55) {
+        shapeContainer1.x -= (10 *speed) * delta
+        shapeContainer1.y += (10 *speed) * delta
+        shapeContainer2.x += (10 *speed) * delta
+        shapeContainer2.y -= (10 *speed) * delta
+
+      }
+
+      if (animationOffset > 56) {
+        shapeContainer1.x += (50 *speed) * delta
+        shapeContainer1.y -= (50 *speed) * delta
+        shapeContainer2.x -= (50 *speed) * delta
+        shapeContainer2.y += (50 *speed) * delta
+      }
+    */

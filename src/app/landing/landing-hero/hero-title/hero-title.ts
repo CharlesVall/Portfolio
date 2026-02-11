@@ -24,27 +24,27 @@ export class HeroTitle implements OnInit, OnDestroy {
   private fullText2 = 'Fullstack';
 
   public ngOnInit(): void {
-    let delay = 0;
+    let animationOffset = 0;
     let len1 = 0;
     let len2 = 0;
 
     this.intervalId = setInterval(() => {
-      delay++;
+      animationOffset++;
       const delta = 1;
 
       if (this.alpha1() < 1) this.alpha1.update(v => Math.min(v + 0.02 * delta, 1));
       if (this.alpha2() < 1) this.alpha2.update(v => Math.min(v + 0.008 * delta, 1));
 
       if (len1 < this.fullText1.length) {
-        if (delay % 7 === 0) {
+        if (animationOffset % 7 === 0) {
           len1++;
           this.line1.set(this.fullText1.slice(0, len1));
           this.cursor1.set(len1 < this.fullText1.length ? '_' : '');
         }
       }
 
-      if (len1 >= this.fullText1.length && len2 < this.fullText2.length && delay >= 60) {
-        if (delay % 7 === 0) {
+      if (len1 >= this.fullText1.length && len2 < this.fullText2.length && animationOffset >= 60) {
+        if (animationOffset % 7 === 0) {
           len2++;
           this.line2.set(this.fullText2.slice(0, len2));
           this.cursor2.set(len2 < this.fullText2.length ? '_' : '');

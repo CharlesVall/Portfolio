@@ -1,0 +1,44 @@
+.contact-links {
+  --magic-color: #D87036;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 2rem;
+  .link-subtitle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    h3 {
+      font-size: 2rem;
+      font-weight: 500;
+      margin: 0;
+    }
+    p {
+      font-size: 1rem;
+      margin: 1rem;
+    }
+  }
+  .link-container {
+      display: grid;
+      place-items: center;
+    a {
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: 400;
+      &:hover {
+        color: var(--magic-color);
+      }
+    }
+    ul {
+      padding: 0;
+      display: grid;
+      place-items: center;
+      list-style: none;
+      li {
+        font-size: 1.2rem;
+      }
+    }
+  }
+}

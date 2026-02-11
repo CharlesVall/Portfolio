@@ -1,8 +1,10 @@
-<header #header [class.scrolled]="isScrolled">
+<header #header [class.scrolled]="isScrolled()">
   <div class="header-container">
     <div class="name-displayer">
       <p>
-        <span id="name">Pierre-Charles </span> &nbsp; <span id="lastname"> Sénard--Vallois</span>
+        <span class="name">Pierre-Charles </span>
+        <span class="lastname desktop">&nbsp; Sénard--Vallois</span>
+        <span class="lastname mobile">S--V</span>
       </p>
     </div>
     <app-navbar />

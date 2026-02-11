@@ -1,6 +1,6 @@
 #typewriter-title {
   position: absolute;
-  left: calc(25% + 580px);
+  left: 70%;
   top: 30%;
   margin: 0;
   color: #ffffff;
@@ -11,4 +11,11 @@
 
 #line1, #line2 {
   display: inline-block;
+}
+
+@media (max-width: 900px) {
+  #typewriter-title {
+    left: 50%;
+    transform: translateX(-50%);
+  }
 }

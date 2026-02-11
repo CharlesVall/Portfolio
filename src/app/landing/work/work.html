@@ -1,0 +1,42 @@
+<section id="work" class="work-section">
+  <div class="title-container">
+    <p appReveal [revealDelay]="800">(noticeable)</p>
+    <h2 appReveal>WORK</h2>
+  </div>
+  
+  <div class="scroll-container" #container>
+    <div class="carousel-wrapper" #wrapper>
+      <div class="card-container">
+        <app-work-card 
+          color="blue" 
+          imageUrl="work-preview/resize/pokeng-showcase-resize.jpg"
+          imageTitle="PokeNg website showcase"
+          imageAlt="Montre une application avec une liste de pokémon détailé et des filtres complexes"
+          workTitle="PokeNg"
+          workAlt="Angular/PrimeNg"
+        />
+      </div>
+      <div class="card-container">
+        <app-work-card
+          color="red"
+          imageUrl="work-preview/resize/EtSi-showcase-resize.jpg" 
+          imageTitle="EtSi website showcase"
+          imageAlt="Une grille de composants informatique complexes avec leur description"
+          workTitle="EtSi"
+          workAlt="Angular/Bootstrap"
+          [reverseOnMobile]="true"
+        />
+      </div>
+      <div class="card-container">
+        <app-work-card
+          color="green"
+          imageUrl="work-preview/resize/portefolio-showcase-resize.jpg" 
+          imageTitle="previous portefolio showcase"
+          imageAlt="L'acceuil du portefolio web précédent"
+          workTitle="Portefolio"
+          workAlt="VueJs"
+        />
+      </div>
+    </div>
+  </div>
+</section>

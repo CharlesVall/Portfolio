@@ -1,4 +1,9 @@
 .landing-container {
   display: flex;
   flex-direction: column;
-}
+  .sections-container {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+ }
