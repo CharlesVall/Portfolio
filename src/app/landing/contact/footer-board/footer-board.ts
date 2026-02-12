@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
-import { DownloadButton } from '../download-button/download-button';
-import { ContactLinks } from "../contact-links/contact-links";
+import { DownloadButton } from './download-button/download-button';
+import { ContactLinks } from "./contact-links/contact-links";
 import { MagicResizeService } from '@core/services/magic-resize-service/magic-resize-service';
 
 @Component({

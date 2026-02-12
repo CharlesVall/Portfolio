@@ -6,6 +6,12 @@
   font-weight: 500;
   display: inline-block;
   z-index: 3;
+  @media (max-width: 780px) {
+    font-size: clamp(1rem, 1.4rem, 1.8rem);
+  }
+  @media (max-width: 480px) {
+    font-size: clamp(1rem, 1rem, 1.2rem);
+  }
 }
 
 .contact-link-mail::after {
