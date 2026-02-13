@@ -93,14 +93,9 @@ export class BackgroundCanva implements OnDestroy {
     this.app.ticker.add((time) => {
       animationOffset += 1;
       let delta = time.deltaTime
-    
-      let speed = 0.1;
-      if (animationOffset < 8000) {
-        container.y -= speed * delta;
-      }
-
-      
-
+  
+      let speed = this.app!.screen.height / 9000;
+      container.y -= speed * delta;   
     })
   }
   
@@ -111,52 +106,3 @@ export class BackgroundCanva implements OnDestroy {
     }
   }
 }
-
-    /*
-        
-    shape1.scale.set(1)
-    shape2.scale.set(1)
-    shapeContainer1.rotation = Math.PI / 3;
-    shapeContainer1.x = this.app.screen.width / 1.15;
-    shapeContainer1.y = -this.app.screen.height / 1.5;
-    
-
-    const shapeContainer1 = new Container();
-    const shapeContainer2 = new Container();
-    this.app.stage.addChild(shapeContainer1);
-    this.app.stage.addChild(shapeContainer2);
-
-    shapeContainer2.rotation = Math.PI / 3;
-    shapeContainer2.x += 98;
-    shapeContainer2.y += -this.app.screen.height / 1.5
-    
-    shapeContainer1.addChild(shape1)
-    shapeContainer2.addChild(shape2)
-
-
-    const blackTexture = await Assets.load('black-shape.jpg')
-    const shape1 = new Sprite(blackTexture)
-    const shape2 = new Sprite(blackTexture)
-
-      if (animationOffset < 20) {
-        shapeContainer1.x += (25 *speed) * delta
-        shapeContainer1.y -= (25 *speed) * delta
-        shapeContainer2.x -= (25 *speed) * delta
-        shapeContainer2.y += (25 *speed) * delta
-      }
-
-      if (animationOffset > 21 && animationOffset < 55) {
-        shapeContainer1.x -= (10 *speed) * delta
-        shapeContainer1.y += (10 *speed) * delta
-        shapeContainer2.x += (10 *speed) * delta
-        shapeContainer2.y -= (10 *speed) * delta
-
-      }
-
-      if (animationOffset > 56) {
-        shapeContainer1.x += (50 *speed) * delta
-        shapeContainer1.y -= (50 *speed) * delta
-        shapeContainer2.x -= (50 *speed) * delta
-        shapeContainer2.y += (50 *speed) * delta
-      }
-    */
