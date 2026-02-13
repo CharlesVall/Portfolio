@@ -54,7 +54,7 @@ export class BackgroundCanva implements OnDestroy {
     this.app.stage.addChild(blendContainer);
     
     const earthTexture = await Assets.load('canva/earth.png');
-    const moonTexture = await Assets.load('canva/moon.png');
+    const moonTexture = await Assets.load('canva/moon3.png');
     const blendTexture = await Assets.load('canva/transparent.png');
 
     const earth = new Sprite(earthTexture);
