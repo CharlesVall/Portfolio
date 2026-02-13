@@ -55,7 +55,7 @@ export class BackgroundCanva implements OnDestroy {
     
     const earthTexture = await Assets.load('canva/earth.png');
     const moonTexture = await Assets.load('canva/moon3.png');
-    const blendTexture = await Assets.load('canva/transparent.png');
+    const blendTexture = await Assets.load('canva/transparent2.png');
 
     const earth = new Sprite(earthTexture);
     const moon = new Sprite(moonTexture);
@@ -68,6 +68,7 @@ export class BackgroundCanva implements OnDestroy {
     earth.scale.set(0.5)
     earth.anchor.set(0.5)
     moon.anchor.set(0.5)
+    moon.scale.x = -1
     blend.anchor.set(0.5)
     earth.x = container.width / 2;
     earth.y = container.height / 2;
@@ -78,12 +79,12 @@ export class BackgroundCanva implements OnDestroy {
     container.y = this.app.screen.height / 2 + 135;
     moonContainer.x = this.app.screen.width / 2;
     moonContainer.y = this.app.screen.height / 2 - 50;
-    blendContainer.x = -this.app.screen.width / 2 + 135;
+    blendContainer.x = -this.app.screen.width / 2;
     blendContainer.y = this.app.screen.height - blendContainer.height;
 
     container.pivot.x = container.width / 2;
     container.pivot.y = container.height / 2;
-    container.rotation = - Math.PI / 2;  
+    container.rotation =  - Math.PI / 2;  
 
     this.app.renderer.on('resize', () => {
       container.x = this.app!.screen.width / 2;
