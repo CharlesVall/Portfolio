@@ -1,2 +1,4 @@
-<div #outer class="cursor-outer" [style.--color]="color()"></div>
-<div #inner class="cursor-inner" [style.--color]="color()"></div>
+<div class="cursor-wrapper" [style.--magic-color]="magicColor()">
+  <div #outer class="cursor-outer"></div>
+  <div #inner class="cursor-inner"></div>
+</div>

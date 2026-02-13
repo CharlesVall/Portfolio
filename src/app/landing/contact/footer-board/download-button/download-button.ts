@@ -9,7 +9,7 @@ import { MagicResizeService } from '@core/services/magic-resize-service/magic-re
 })
 export class DownloadButton {
   private readonly magicResizeService = inject(MagicResizeService)
-  public readonly magicColor = this.magicResizeService.magicColor;
+  protected readonly magicColor = this.magicResizeService.magicColor;
 
   protected downloadCV(): void {
     const link = document.createElement('a');

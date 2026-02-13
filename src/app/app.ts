@@ -1,11 +1,12 @@
-import { Component, HostListener, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ScrollService } from '@core/services/scroll-service/scroll-service';
 import { SeoService } from '@core/services/seo-service/seo-service';
+import { CustomCursor } from '@shared/components/custom-cursor/custom-cursor';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, CustomCursor],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })

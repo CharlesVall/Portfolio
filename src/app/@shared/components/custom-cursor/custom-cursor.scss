@@ -1,0 +1,35 @@
+.cursor-wrapper {
+  --magic-color: rgba(216, 112, 54, 0.5);
+  @media (max-width: 780px) {
+    display: none;
+  }
+  .cursor-outer,
+  .cursor-inner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    transform-origin: center;
+    z-index: 10;
+  }
+  
+  .cursor-outer {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 1px solid var(--magic-color);
+    background: transparent;
+    transition: opacity 0.15s ease-in-out;
+  }
+  
+  .cursor-inner {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--magic-color);
+    transition: opacity 0.15s ease-in-out,
+                transform 0.15s ease-in-out;
+  }
+
+}

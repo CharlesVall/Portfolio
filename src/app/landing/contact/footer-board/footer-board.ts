@@ -11,5 +11,5 @@ import { MagicResizeService } from '@core/services/magic-resize-service/magic-re
 })
 export class FooterBoard {
   private readonly magicResizeService = inject(MagicResizeService)
-  public readonly magicColor = this.magicResizeService.magicColor
+  protected readonly magicColor = this.magicResizeService.magicColor;
 }

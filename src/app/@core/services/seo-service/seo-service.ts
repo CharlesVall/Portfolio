@@ -1,7 +1,7 @@
 import { DOCUMENT } from '@angular/common';
 import { inject, Injectable } from '@angular/core';
 import { Meta, MetaDefinition, Title } from '@angular/platform-browser';
-import { SeoConfig } from '@core/models/seo-config';
+import { SeoConfig } from '@core/models/';
 import { SEO_DEFAULTS } from '@core/tokens/seo-defaults.token';
 
 @Injectable({
