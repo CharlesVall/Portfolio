@@ -63,7 +63,7 @@ export class BackgroundCanva implements OnDestroy {
 
     container.addChild(earth);
     moonContainer.addChild(moon)
-    blendContainer.addChild(blend)
+    //blendContainer.addChild(blend)
     
     earth.scale.set(0.5)
     earth.anchor.set(0.5)
