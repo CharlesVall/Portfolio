@@ -47,55 +47,63 @@ export class BackgroundCanva implements OnDestroy {
     
     const container = new Container();
     const moonContainer = new Container();
-    const blendContainer = new Container();
 
     this.app.stage.addChild(container);
     this.app.stage.addChild(moonContainer);
-    this.app.stage.addChild(blendContainer);
     
     const earthTexture = await Assets.load('canva/earth.png');
     const moonTexture = await Assets.load('canva/moon3.png');
-    const blendTexture = await Assets.load('canva/transparent2.png');
 
     const earth = new Sprite(earthTexture);
     const moon = new Sprite(moonTexture);
-    const blend = new Sprite(blendTexture);
 
     container.addChild(earth);
     moonContainer.addChild(moon)
-    //blendContainer.addChild(blend)
     
     earth.scale.set(0.5)
     earth.anchor.set(0.5)
+
     moon.anchor.set(0.5)
     moon.scale.x = -1
-    blend.anchor.set(0.5)
+
     earth.x = container.width / 2;
     earth.y = container.height / 2;
-    blend.x = blendContainer.width / 2;
-    blend.y = blendContainer.height / 2;
     
     container.x = this.app.screen.width / 2;
     container.y = this.app.screen.height / 2 + 135;
-    moonContainer.x = this.app.screen.width / 2;
-    moonContainer.y = this.app.screen.height / 2 - 50;
-    blendContainer.x = -this.app.screen.width / 2;
-    blendContainer.y = this.app.screen.height - blendContainer.height;
 
-    container.pivot.x = container.width / 2;
-    container.pivot.y = container.height / 2;
+    container.pivot.set(container.width / 2, container.height / 2);
     container.rotation =  - Math.PI / 2;  
+
+    const positionMoon = () => {
+      const screenHeight = this.app!.screen.height;
+      const screenWidth = this.app!.screen.width;
+
+      const lastTierTopY = screenHeight * 2 / 4;
+      const lastTierHeight = screenHeight / 4;
+      const moonHeight = moon.height;
+
+      moonContainer.x = screenWidth / 2;
+
+      if (moonHeight > lastTierHeight) {
+        moonContainer.y = lastTierTopY + moonHeight / 2;
+      } else {
+        moonContainer.y = screenHeight - moonHeight / 2;
+      }
+    };
+
+    positionMoon();
 
     this.app.renderer.on('resize', () => {
       container.x = this.app!.screen.width / 2;
-      moonContainer.x = this.app!.screen.width / 2;
+      positionMoon();
     });
 
+
     this.app.ticker.add((time) => {
-      animationOffset += 1;
-      let delta = time.deltaTime
+      const delta = time.deltaTime
+      const speed = this.app!.screen.height / 9000;
   
-      let speed = this.app!.screen.height / 9000;
       container.y -= speed * delta;   
     })
   }
