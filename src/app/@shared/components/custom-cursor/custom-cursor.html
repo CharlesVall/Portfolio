@@ -1,4 +1,12 @@
 <div class="cursor-wrapper" [style.--magic-color]="magicColor()">
-  <div #outer class="cursor-outer"></div>
-  <div #inner class="cursor-inner"></div>
+  <div #outer 
+       class="cursor-outer" 
+       [class.is-hovering]="isHovering()" 
+       [class.is-pressed]="isPressed()">
+  </div>
+  <div #inner 
+       class="cursor-inner" 
+       [class.is-hovering]="isHovering()" 
+       [class.is-pressed]="isPressed()">
+  </div>
 </div>

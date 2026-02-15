@@ -1,5 +1,6 @@
 .cursor-wrapper {
   --magic-color: rgba(216, 112, 54, 0.5);
+  pointer-events: none;
   @media (max-width: 780px) {
     display: none;
   }
@@ -8,28 +9,45 @@
     position: fixed;
     top: 0;
     left: 0;
-    pointer-events: none;
-    transform: translate(-50%, -50%);
     transform-origin: center;
     z-index: 10;
+    will-change: transform;
   }
   
   .cursor-outer {
     width: 28px;
     height: 28px;
+    position: fixed;
+    top: 0;
+    left: 0;
     border-radius: 50%;
     border: 1px solid var(--magic-color);
-    background: transparent;
+    transform: translate3d(var(--x, 0), var(--y, 0), 0) translate(-50%, -50%);
     transition: opacity 0.15s ease-in-out;
+    will-change: transform;
   }
   
-  .cursor-inner {
+ .cursor-inner {
     width: 7px;
     height: 7px;
+    position: fixed;
+    top: 0;
+    left: 0;
     border-radius: 50%;
     background: var(--magic-color);
-    transition: opacity 0.15s ease-in-out,
-                transform 0.15s ease-in-out;
+    z-index: 10;
+    pointer-events: none;
+    --scale: 1;
+    transform: translate3d(var(--x, 0), var(--y, 0), 0) translate(-50%, -50%) scale(var(--scale));
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.15s;
+    will-change: transform;
+    &.is-pressed,
+    &.is-hovering {
+      --scale: 2.5;
+      transition-duration: 0.1s;
+    }
+    &.is-hovering {
+      opacity: 0.8;
+    }
   }
-
 }
