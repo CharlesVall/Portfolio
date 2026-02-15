@@ -1,22 +1,28 @@
-import { Component, ElementRef, viewChild, inject, NgZone, afterNextRender, OnDestroy } from '@angular/core';
+import { Component, ElementRef, viewChild, inject, NgZone, afterNextRender, DestroyRef } from '@angular/core';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { WorkCard } from './work-card/work-card';
 import { RevealDirective } from "@shared/directives/reveal.directive";
+import { WorkService } from '@core/services/work-service/work-service';
+import { FullscreenWork } from './fullscreen-work/fullscreen-work';
 
 @Component({
   selector: 'app-work',
   standalone: true,
-  imports: [WorkCard, RevealDirective],
+  imports: [WorkCard, RevealDirective, FullscreenWork],
   templateUrl: './work.html',
   styleUrls: ['./work.scss']
 })
-export class Work implements OnDestroy {
+export class Work {
   private readonly ngZone = inject(NgZone);
+  private readonly workService = inject(WorkService);
+  private readonly destroyRef = inject(DestroyRef);
   private mm = gsap.matchMedia();
 
   private readonly container = viewChild.required<ElementRef>('container');
   private readonly wrapper = viewChild.required<ElementRef>('wrapper');
+  protected readonly showOverlay = this.workService.showFullscreen;
+  protected readonly workDataList = this.workService.workDataList;
   
   public constructor() {
     afterNextRender(() => {
@@ -26,6 +32,8 @@ export class Work implements OnDestroy {
         });
       });
     });
+
+    this.destroyRef.onDestroy(() => this.mm.revert());
   }
   
   private initHorizontalScroll(): void {
@@ -74,7 +82,7 @@ export class Work implements OnDestroy {
     });
   }
 
-   public ngOnDestroy() {
-    this.mm.revert();
+  protected openOverlay(): void {
+    this.workService.openOverlay();
   }
 }

@@ -14,6 +14,7 @@ $anim-speed: 8s;
 .work-card {
   display: flex;
   gap: 3rem;
+  cursor: pointer;
   @media (max-width: 1024px) {
     gap: 1rem;
     justify-content: space-between;
@@ -25,6 +26,7 @@ $anim-speed: 8s;
   .work-card__aside {
     display: flex;
     flex-direction: column;
+    opacity: 0;
     @media (max-width: 768px) {
       display: none;
     }
@@ -113,6 +115,14 @@ $anim-speed: 8s;
     radial-gradient(at 41% 94%, hsla(284, 100%, 84%, 1) 0px, transparent 85%),
     radial-gradient(at 100% 99%, hsla(306, 100%, 57%, 1) 0px, transparent 85%);
   }
+/*
+  &:hover {
+   img {
+    width: 80%;
+    height: 80%;
+    transition: 0.2s ease-in-out;
+   } 
+  }*/
   .card-border {
     position: absolute;
     top: 50%;
@@ -154,6 +164,7 @@ $anim-speed: 8s;
     aspect-ratio: 16 / 9;
     object-fit: cover;
     object-position: center;
+    transition: 0.2s ease-in-out;
     @media (max-width: 768px) {
       width: 100%;
       height: 100%;

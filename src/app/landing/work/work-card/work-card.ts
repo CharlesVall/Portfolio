@@ -1,18 +1,14 @@
 import { NgOptimizedImage } from '@angular/common';
 import { Component, input } from '@angular/core';
+import { WorkData } from '@core/models';
+import { RevealDirective } from '@shared/directives/reveal.directive';
 
 @Component({
   selector: 'app-work-card',
-  imports: [NgOptimizedImage],
+  imports: [NgOptimizedImage, RevealDirective],
   templateUrl: './work-card.html',
   styleUrl: './work-card.scss',
 })
 export class WorkCard {
-  public readonly color = input<string>();
-  public readonly imageUrl = input.required<string>();
-  public readonly imageTitle = input<string>();
-  public readonly imageAlt = input<string>();
-  public readonly workTitle = input.required<string>();
-  public readonly workAlt = input.required<string>();
-  public readonly reverseOnMobile = input<boolean>();
+  public readonly workData = input<WorkData>();
 }

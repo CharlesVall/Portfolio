@@ -1,17 +1,17 @@
-<div class="work-card" [class.is-reversed]="reverseOnMobile()">
-  <div class="work-card__aside">
-    <h3>{{ workTitle() }}</h3>
-    <p>{{ workAlt() }}</p>
+<div class="work-card" [class.is-reversed]="workData()!.reverseOnMobile">
+  <div class="work-card__aside" appReveal>
+    <h3>{{ workData()!.workTitle }}</h3>
+    <p>{{ workData()!.workAlt }}</p>
   </div>
 
-  <div class="card" [class]="color()">
+  <div class="card cursor-pointer" [class]="workData()!.color">
     <div class="card-border"></div>
     <img 
-    [ngSrc]="imageUrl()"
+    [ngSrc]="workData()!.imageUrl"
     width="448"
     height="270"
-    [title]="imageTitle()"
-    [alt]="imageAlt()"
+    [title]="workData()!.imageTitle"
+    [alt]="workData()!.imageAlt"
     priority
     />
   </div>
