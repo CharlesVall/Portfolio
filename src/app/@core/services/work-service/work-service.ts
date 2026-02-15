@@ -8,16 +8,21 @@ export class WorkService {
   private readonly headerService = inject(HeaderService);
   public readonly workDataList: WorkData[] = inject(WORK_DATA_TOKEN);
   
-  private readonly _showFullscreen = signal(false);
-  public readonly showFullscreen = this._showFullscreen.asReadonly();
+  private readonly _isWorkFullscreen = signal(false);
+  public readonly isWorkFullscreen = this._isWorkFullscreen.asReadonly();
 
-  public openOverlay() {
-    this._showFullscreen.set(true);
+  private readonly _activeWork = signal(this.workDataList[0]);
+  public readonly activeWork = this._activeWork.asReadonly();
+
+  public openFullscreen(work: WorkData) {
+    this._activeWork.set(work)
+    this._isWorkFullscreen.set(true);
     this.headerService.hideHeader();
   }
 
-  public closeOverlay() {
-    this._showFullscreen.set(false);
+  public closeFullscreen() {
+    this._isWorkFullscreen.set(false);
     this.headerService.showHeader();
+    this._activeWork.set(this.workDataList[0])
   }
 }

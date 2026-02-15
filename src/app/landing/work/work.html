@@ -8,7 +8,7 @@
     <div class="carousel-wrapper" #wrapper>
       @for (work of workDataList; track work.workTitle) {
         <div class="card-container">
-          <app-work-card (click)="openOverlay()"
+          <app-work-card (click)="openFullscreen(work)"
             [workData]="work"
           />
         </div>
@@ -16,7 +16,7 @@
     </div>
   </div>
   
-  @if (showOverlay()) {
+  @if (isWorkFullscreen()) {
     <app-fullscreen-work />
   }
 </section>

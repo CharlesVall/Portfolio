@@ -5,6 +5,7 @@ import { WorkCard } from './work-card/work-card';
 import { RevealDirective } from "@shared/directives/reveal.directive";
 import { WorkService } from '@core/services/work-service/work-service';
 import { FullscreenWork } from './fullscreen-work/fullscreen-work';
+import { WorkData } from '@core/models';
 
 @Component({
   selector: 'app-work',
@@ -21,7 +22,7 @@ export class Work {
 
   private readonly container = viewChild.required<ElementRef>('container');
   private readonly wrapper = viewChild.required<ElementRef>('wrapper');
-  protected readonly showOverlay = this.workService.showFullscreen;
+  protected readonly isWorkFullscreen = this.workService.isWorkFullscreen;
   protected readonly workDataList = this.workService.workDataList;
   
   public constructor() {
@@ -82,7 +83,7 @@ export class Work {
     });
   }
 
-  protected openOverlay(): void {
-    this.workService.openOverlay();
+  protected openFullscreen(work: WorkData): void {
+    this.workService.openFullscreen(work);
   }
 }
