@@ -20,9 +20,7 @@ export class FullscreenWork {
 
   protected close(): void {
     this.isExiting.set(true);
-    setTimeout(() => {
-      this.workService.closeFullscreen();
-      this.isExiting.set(false);
-    }, 500);
+    this.workService.closeFullscreen();
+    this.isExiting.set(false);
   }
 }

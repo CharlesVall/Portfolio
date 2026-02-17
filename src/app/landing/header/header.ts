@@ -51,7 +51,7 @@ export class Header {
     gsap.fromTo(
       this.header().nativeElement,
       { y: -250, opacity: 0 },
-      { y: 0, opacity: 1, duration: 1, ease: 'power3.out' }
+      { y: 0, opacity: 1, duration: 1, ease: 'power3.out', overwrite: 'auto' }
     );
   }
 
@@ -61,6 +61,7 @@ export class Header {
       opacity: 0,
       duration: 0.5,
       ease: 'power3.in',
+      overwrite: 'auto'
     });
   }
 }
