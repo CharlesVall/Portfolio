@@ -1,21 +1,23 @@
-<div class="overlay">
+<div class="overlay" [class.exit]="isExiting()">
   <div class="overlay-content">
     <div class="main-wrapper">
       <div class="left">
-        <button (click)="close()">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="opacity:1;"><path d="m8 5l-5 5l5 5"/><path d="M3 10h8c5.523 0 10 4.477 10 10v1"/></svg>
-        </button>
-        <h3>{{ workData().workTitle }}</h3>
-      </div>
-      <div class="right">
-        <img 
-          [ngSrc]="workData()!.imageUrl"
-          width="448"
-          height="270"
-          [title]="workData()!.imageTitle"
-          [alt]="workData()!.imageAlt"
+        <app-fullscreen-button (click)="close()"/>
+        <app-fullscreen-aside 
+          [workTitle]="workData()!.workTitle" 
+          [description]="workData()!.description"
         />
       </div>
+      <div class="right">
+        <app-fullscreen-image 
+          [imageUrl]="workData()!.imageUrl"
+          [imageTitle]="workData()!.imageTitle"
+          [imageAlt]="workData()!.imageAlt"
+        />
+      </div>
+    </div>
+    <div class="overlay-footer">
+      <app-fullscreen-footer [workAlt]="workData()!.workAlt"/>
     </div>
   </div>
 </div>

@@ -4,6 +4,7 @@ section.contact-section {
   .container {
     h2 {
       text-align: center;
+      opacity: 0;
       @media (max-width: 768px) {
         font-size: 3rem;
       }

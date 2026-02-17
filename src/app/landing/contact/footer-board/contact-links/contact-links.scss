@@ -45,11 +45,32 @@
     }
     ul {
       padding: 0;
-      display: grid;
-      place-items: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       list-style: none;
+      gap: 1rem;
       li {
-        font-size: 1.2rem;
+        a {
+          display: grid;
+          place-items: center;
+          width: 33px;
+          height: 33px;
+          font-size: 1.25rem;
+          border: 1px solid white;
+          text-decoration: none;
+          border-radius: 50%;
+          transition: all 0.3s ease;
+          &:hover {
+            background-color: color-mix(
+              in srgb,
+              var(--magic-color) 50%,
+              transparent
+            );
+            color: black;
+            transform: scale(0.98);
+          }
+        }
       }
     }
   }

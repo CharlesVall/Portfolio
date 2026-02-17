@@ -4,8 +4,8 @@
   text-decoration: none;
   font-size: 2rem;
   font-weight: 500;
+  z-index: 0;
   display: inline-block;
-  z-index: 3;
   @media (max-width: 780px) {
     font-size: clamp(1rem, 1.4rem, 1.8rem);
   }

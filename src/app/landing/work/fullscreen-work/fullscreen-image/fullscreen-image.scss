@@ -1,0 +1,22 @@
+.image-wrapper {
+  width: min(60vw, 768px);
+  aspect-ratio: 2 / 1;
+  position: relative;
+  @media (max-width: 1024px) {
+    width: min(50vw, 768px);
+  }
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    animation: pullUp 2s cubic-bezier(0.22, 1, 0.36, 1) 0.4s forwards;
+    will-change: transform, clip-path;
+    animation-delay: 1.2s;
+    opacity: 0;
+  }
+}
+
+@keyframes pullUp {
+  from { transform: translateY(100%); clip-path: inset(0 0 100% 0); opacity: 1; }
+  to { transform: translateY(0); clip-path: inset(0 0 0 0); opacity: 1; }
+}
