@@ -8,6 +8,9 @@ button {
   margin-bottom: 2rem;
   font-size: 2rem;
   color: white;
+  @media (max-width: 768px) {
+    margin-bottom: 0;
+  }
   &:hover {
     transform: translateX(-5px);
   }

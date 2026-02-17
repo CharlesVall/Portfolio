@@ -5,6 +5,13 @@
   @media (max-width: 1024px) {
     width: min(50vw, 768px);
   }
+  @media (max-width: 768px) {
+    width: min(70vw, 768px);
+  }
+  @media (max-width: 480px) {
+    margin-top: 10rem;
+    width: min(100vw, 1024px)
+  }
   img {
     width: 100%;
     height: 100%;

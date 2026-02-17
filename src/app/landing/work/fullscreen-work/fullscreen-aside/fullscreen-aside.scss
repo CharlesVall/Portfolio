@@ -1,4 +1,9 @@
+:host {
+  width: 100%;
+}
+
 .aside-wrapper {
+  width: 100%;
   h3 {
     font-size: 4.5rem;
     max-width: fit-content;
@@ -6,10 +11,24 @@
     text-align: right;
     font-family: "Stack Sans Notch", sans-serif;
     opacity: 0;
+    @media (max-width: 768px) {
+      font-size: 3rem;
+    }
   }
   
   p {
     width: 100%;
     opacity: 0;
+    @media (max-width: 768px) {
+      width: 80%;
+      background: linear-gradient(
+        to bottom,
+        rgba(0,0,0,0.65),
+        rgba(0,0,0,0.35)
+      );
+      color: white;
+      padding: 0.5em 0.8em;
+      border-radius: 6px;
+    }
   }
 }
