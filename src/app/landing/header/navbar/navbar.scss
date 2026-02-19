@@ -23,7 +23,7 @@ nav {
         height: 2px;
         border-radius: 4px;
         background-color: #ffffff91;
-        top: 50%;
+        top: 0;
         transform-origin: right;
         transform: scaleX(0);
         transition: transform .32s ease-in-out;
@@ -36,7 +36,7 @@ nav {
         height: 2px;
         border-radius: 4px;
         background-color: #ffffff91;
-        top: 50%;
+        bottom: 0;
         left: 0;
         transform-origin: left;
         transform: scaleX(0);
