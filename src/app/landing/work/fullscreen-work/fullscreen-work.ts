@@ -18,8 +18,10 @@ export class FullscreenWork {
   protected readonly workData = this.workService.activeWork;
   protected readonly isExiting = signal(false);
 
-  protected close(): void {
+  protected async close(): Promise<void> {
     this.isExiting.set(true);
+
+    await new Promise(resolve => setTimeout(resolve, 500));
     this.workService.closeFullscreen();
     this.isExiting.set(false);
   }
