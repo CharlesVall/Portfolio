@@ -17,46 +17,88 @@ export class SeoService {
     const seo = { ...this.defaults, ...config } as SeoConfig;
 
     this.title.setTitle(seo.title);
-    
+    this.applyMetaTags(seo);
+    this.setCanonical(seo.canonical);
+  }
+
+  private applyMetaTags(seo: SeoConfig): void {
     const tags: MetaDefinition[] = [
+      ...this.buildCoreTags(seo),
+      ...this.buildOpenGraphTags(seo),
+      ...this.buildTwitterTags(seo),
+    ];
+
+    tags.forEach((tag) => this.meta.updateTag(tag));
+  }
+
+  private buildCoreTags(seo: SeoConfig): MetaDefinition[] {
+    return [
       { name: 'description', content: seo.description },
-      { name: 'robots', content: seo.noIndex ? 'noindex, nofollow' : 'index, follow' },
-      // Open Graph
+      {
+        name: 'robots',
+        content: seo.noIndex ? 'noindex, nofollow' : 'index, follow',
+      },
+    ];
+  }
+
+  private buildOpenGraphTags(seo: SeoConfig): MetaDefinition[] {
+    const canonical = seo.canonical ?? this.doc.URL;
+
+    const tags: MetaDefinition[] = [
       { property: 'og:title', content: seo.title },
       { property: 'og:description', content: seo.description },
       { property: 'og:type', content: seo.type ?? 'website' },
-      { property: 'og:url', content: seo.canonical ?? this.doc.URL },
-      // Twitter card
-      { name: 'twitter:card', content: 'summary_large_image' },
+      { property: 'og:url', content: canonical },
+    ];
+
+    if (seo.image) {
+      tags.push(
+        { property: 'og:image', content: seo.image },
+        { property: 'og:image:alt', content: seo.imageAlt ?? seo.title },
+      );
+
+      if (seo.imageWidth) {
+        tags.push({ property: 'og:image:width', content: String(seo.imageWidth) });
+      }
+      if (seo.imageHeight) {
+        tags.push({ property: 'og:image:height', content: String(seo.imageHeight) });
+      }
+    }
+
+    return tags;
+  }
+
+  private buildTwitterTags(seo: SeoConfig): MetaDefinition[] {
+    const tags: MetaDefinition[] = [
+      { name: 'twitter:card', content: seo.twitterCard ?? 'summary_large_image' },
       { name: 'twitter:title', content: seo.title },
       { name: 'twitter:description', content: seo.description },
     ];
 
     if (seo.image) {
       tags.push(
-        { property: 'og:image', content: seo.image },
-        { name: 'twitter:image', content: seo.image }
+        { name: 'twitter:image', content: seo.image },
+        { name: 'twitter:image:alt', content: seo.imageAlt ?? seo.title },
       );
-      if (seo.imageAlt) {
-        tags.push({ property: 'og:image:alt', content: seo.imageAlt });
-      }
     }
 
-    tags.forEach((tag) => this.meta.updateTag(tag));
-    this.setCanonical(seo.canonical);
+    return tags;
   }
 
   private setCanonical(url?: string): void {
     if (!url) return;
-    
-    let link = this.doc.querySelector<HTMLLinkElement>('link[rel="canonical"]');
-    
-    if (!link) {
-      link = this.doc.createElement('link');
-      link.setAttribute('rel', 'canonical');
-      this.doc.head.appendChild(link);
-    }
-    
+
+    const link =
+      this.doc.querySelector<HTMLLinkElement>('link[rel="canonical"]') ??
+      this.createCanonicalLink();
+
     link.setAttribute('href', url);
+  }
+
+  private createCanonicalLink(): HTMLLinkElement {
+    const link = this.doc.createElement('link');
+    link.setAttribute('rel', 'canonical');
+    this.doc.head.appendChild(link);
+    return link;
   }
 }
