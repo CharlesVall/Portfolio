@@ -2,14 +2,19 @@
   <div class="overlay-content">
     <div class="main-wrapper">
       <div class="left">
-        <app-fullscreen-button (click)="close()"/>
-        <app-fullscreen-aside 
-          [workTitle]="workData()!.workTitle" 
+        <app-fullscreen-button
+          tabindex="0"
+          (click)="close()"
+          (keydown.enter)="close()"
+          (keydown.space)="close()"
+        />
+        <app-fullscreen-aside
+          [workTitle]="workData()!.workTitle"
           [description]="workData()!.description"
         />
       </div>
       <div class="right">
-        <app-fullscreen-image 
+        <app-fullscreen-image
           [imageUrl]="workData()!.imageUrl"
           [imageTitle]="workData()!.imageTitle"
           [imageAlt]="workData()!.imageAlt"

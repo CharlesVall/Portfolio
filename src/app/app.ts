@@ -18,6 +18,6 @@ export class App implements OnInit{
     this.seoService.update({
       noIndex: false
     })
-    
+
   }
 }

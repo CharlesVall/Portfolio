@@ -3,19 +3,22 @@
     <p appReveal [revealDelay]="800">(noticeable)</p>
     <h2 appReveal>WORK</h2>
   </div>
-  
+
   <div class="scroll-container" #container>
     <div class="carousel-wrapper" #wrapper>
       @for (work of workDataList; track work.workTitle) {
         <div class="card-container">
-          <app-work-card (click)="openFullscreen(work)"
+          <app-work-card
+            (click)="openFullscreen(work)"
+            (keydown.enter)="openFullscreen(work)"
+            (keydown.space)="openFullscreen(work)"
             [workData]="work"
           />
         </div>
       }
     </div>
   </div>
-  
+
   @if (isWorkFullscreen()) {
     <app-fullscreen-work />
   }

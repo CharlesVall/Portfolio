@@ -24,8 +24,9 @@ export class Work {
   private readonly wrapper = viewChild.required<ElementRef>('wrapper');
   protected readonly isWorkFullscreen = this.workService.isWorkFullscreen;
   protected readonly workDataList = this.workService.workDataList;
-  
+
   public constructor() {
+
     afterNextRender(() => {
       requestAnimationFrame(() => {
         this.ngZone.runOutsideAngular(() => {
@@ -36,10 +37,11 @@ export class Work {
 
     this.destroyRef.onDestroy(() => this.mm.revert());
   }
-  
+
   private initHorizontalScroll(): void {
     gsap.registerPlugin(ScrollTrigger);
-
+    console.log(gsap)
+    console.log("s")
     const containerEl = this.container().nativeElement;
     const wrapperEl = this.wrapper().nativeElement;
 

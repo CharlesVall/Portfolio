@@ -4,9 +4,9 @@
     <p>{{ workData()!.workAlt }}</p>
   </div>
 
-  <div class="card cursor-pointer" [class]="workData()!.color">
+  <div class="card cursor-pointer" [class]="workData()!.color" tabindex="0">
     <div class="card-border"></div>
-    <img 
+    <img
     [ngSrc]="workData()!.imageUrl"
     width="480"
     height="238"
