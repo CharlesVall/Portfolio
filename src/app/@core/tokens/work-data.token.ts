@@ -43,6 +43,16 @@ export const WORK_DATA_TOKEN = new InjectionToken<WorkData[]>('WORK_DATA_TOKEN',
         workTitle: "Portefolio",
         workAlt: "VueJs",
         description: "Mon ancien portfolio est une application web développée avec Vue.js, conçue pour présenter mes premiers projets et compétences en développement front-end. Il avait pour objectif de proposer une vitrine claire et responsive de mon profil, tout en me permettant de me familiariser avec l’architecture Vue et la gestion de SPA scrollable. Ce projet m’a servi de base pour structurer mon identité professionnelle et poser les fondations de mon portfolio actuel."
+      },
+      {
+        color: "purple",
+        imageUrl: "work-preview/nymphea-showcase.jpg",
+        imageTitle: "Nymphea Api showcase",
+        imageAlt: "La page d'accueil de l'API Nymphea",
+        workTitle: "Nymphea",
+        workAlt: "Java / Spring Boot / Clean Architecture",
+        description: "Une API REST développée avec Java et Spring Boot, conçue pour mettre à disposition la collection des peintures des Nymphéas de Claude Monet à travers une architecture claire, maintenable et pensée en Clean Architecture. Elle permet la consultation, la recherche et l’organisation des œuvres via différents endpoints structurés, tout en séparant clairement les responsabilités entre domaine, application et infrastructure. Ce projet m’a permis de consolider mes compétences en développement back-end, en conception d’API, en architecture logicielle et en organisation de code orientée robustesse et évolutivité.",
+        reverseOnMobile: true
       }
     ];
 
